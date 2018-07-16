@@ -2,11 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+    #x {
+        display: block;
+        width: 800px;
+        height: 500px;
+        margin: 0 auto;
+    }
+ 	#b,#t {
+ 		display: block;
+        width: 50px;
+        height: 20px;
+        margin: 0 auto;
+ 	}
+    </style>
 </head>
 <body>
-    
+    <!-- <textarea name="" id="x" cols="30" rows="10"></textarea> -->
+    <video id="x">
+    	<source src="http://www.iqiyi.com/bb7f701e-4d4a-4a81-b30f-8f5a8a93f66e" type="">
+    </video>
+    <button id="b">play</button>
+   	<span id="t"></span>
+
+<script>
+	var key = true
+	var x= document.getElementById('x')
+	var b = document.getElementById('b')
+	var t = document.getElementById('t')
+	x.onload = function(){
+		this.play()
+	}
+	
+	b.addEventListener('click',function(){
+		if(key){
+			x.play()
+			key = !key
+		}else{
+			x.pause()
+			key = !key
+		}
+	})
+	x.onplay= function(){
+		t.innerText = x.currentTime
+	}
+</script>
 </body>
 </html>
