@@ -1,4 +1,5 @@
-# 函数表达式
+- 环境
+- 关键字 this
 
 
 ## 一、环境
@@ -31,12 +32,13 @@ k.fn()  // { name: "k", age: 20 }
 
 
 ## 二、关键字 this
-this 是一个指针，一般指向其所在函数的执行环境（作用域链）的第二个环境对象（或者说是指向[[scope]]的第一个环境对象）  
+#### this 是一个指针，一般指向其所在函数的执行环境（作用域链）的第二个环境对象（或者说是指向[[scope]]的第一个环境对象）  
 - 知识补全：（函数的几种环境）
 1. 根据函数的内、外部，可以分为：函数的内部环境、函数的外部环境。
 2. 根据函数的创建过程和执行过程，可以将函数环境分为两种：函数的定义环境、函数的执行环境。  
 3. 函数的执行环境就是我们通常说的 “上下文”。
 4. 更改环境（即更改 this 的指向）的两类方法：<b>显式更改</b> 和 <b>隐式更改</b>。（在箭头函数里，this 的指向无法更改）
+5. 执行环境（作用域链）= 函数内部环境 + 定义环境[[scope]]
 
 
 ### 1. 函数的定义环境
@@ -68,7 +70,7 @@ shout()  // "window"
 var a = 'window';
 function say(){
     var a = 'say';
-    return this.a     // 原来的 "return a" 变成 "return this.a"，返回值变成执行环境的 a 
+    return this.a     // 原来的 "return a" 变成 "return this.a"
 }
 say()   // "window"
 
@@ -102,8 +104,55 @@ k.shout()
 ```
 通过上面两个例子，我们可以知道，无论 say 被哪一个函数调用，放回结果都是一样的。
 
+### 4. this 指向的深度理解
+例1：
+```js
+var x = 1
+function a(){
+    var x = 'a'
+    function b(){
+        var x = 'b'
+        function c(){
+            var x = 'c'
+            return this.x
+        }
+        return c()
+    }
+    return b()
+}
+a()
+```
+例2：
+```js
+var x = 1
+var obj = {
+    x: 'obj',
+    a: function a(){
+        var x = 'a'
+        function b(){
+            var x = 'b'
+            function c(){
+                var x = 'c'
+                return this.x
+            }
+            return c()
+        }
+        return b()
+    }
+}
+obj.a()
+```
+执行过上面的代码后，是否已经开始疑惑了？我们之前对 this 指向的说法是不是出错了？  
+我没错！没错！因为我说的是“一般”（狡猾）  
+回归正题，在探讨这个问题之前，我们先了解一下函数的创建过程。
 
-### 3. 函数环境的更改
+
+
+
+
+
+
+### 4. 函数环境的更改（更改 this 的指向）
 - <font size="4">显式更改（call、apply、bind）</font>
 ```js
 var a = 1;
@@ -121,8 +170,8 @@ say.bind(second)()  // 2
 say()     // 1     
 ```
 > 我们可以理解为：  
-> call、apply 函数对 say 函数进行深拷贝得到副本，然后，将副本的 [[scope]] 的第一个环境对象更改为 second 对象，再执行副本函数，返回结果。  
-> bind 函数对 say 函数进行深拷贝得到副本，然后，将副本的 [[scope]] 的第一个环境对象更改为 second 对象，最后，返回函数副本。
+> call、apply 函数对 say 函数进行深拷贝得到副本，然后，将副本的 [[scope]] 的 this 指向更改为 second 对象，再执行副本函数，返回结果。  
+> bind 函数对 say 函数进行深拷贝得到副本，然后，将副本的 [[scope]] 的 this 指向更改为 second 对象更改为 second 对象，最后，返回函数副本。
 
 
 - <font size="4">隐式更改</font>
