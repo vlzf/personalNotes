@@ -32,7 +32,7 @@ k.fn()  // { name: "k", age: 20 }
 
 
 ## 二、关键字 this
-#### this 是一个指针，一般指向其所在函数的执行环境（作用域链）的第二个环境对象（或者说是指向[[scope]]的第一个环境对象）  
+this 是一个指针，一般指向其所在函数的执行环境（作用域链）的第二个环境对象（或者说是指向[[scope]]的第一个环境对象）  
 - 知识补全：（函数的几种环境）
 1. 根据函数的内、外部，可以分为：函数的内部环境、函数的外部环境。
 2. 根据函数的创建过程和执行过程，可以将函数环境分为两种：函数的定义环境、函数的执行环境。  
@@ -105,6 +105,7 @@ k.shout()
 通过上面两个例子，我们可以知道，无论 say 被哪一个函数调用，放回结果都是一样的。
 
 ### 4. this 指向的深度理解
+接下来将会把之前所说的彻底推翻
 例1：
 ```js
 var x = 1
@@ -112,11 +113,7 @@ function a(){
     var x = 'a'
     function b(){
         var x = 'b'
-        function c(){
-            var x = 'c'
-            return this.x
-        }
-        return c()
+        return this.x
     }
     return b()
 }
@@ -131,20 +128,15 @@ var obj = {
         var x = 'a'
         function b(){
             var x = 'b'
-            function c(){
-                var x = 'c'
-                return this.x
-            }
-            return c()
+            return this.x
         }
         return b()
     }
 }
 obj.a()
 ```
-执行过上面的代码后，是否已经开始疑惑了？我们之前对 this 指向的说法是不是出错了？  
-我没错！没错！因为我说的是“一般”（狡猾）  
-回归正题，在探讨这个问题之前，我们先了解一下函数的创建过程。
+执行过上面的代码后，发现不对劲了，到底怎么回事？
+这个问题的解答，我们将在[函数的创建过程](https://github.com/vlzf/personalNotes/blob/master/js-base-note/%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA.md)解决。
 
 
 
