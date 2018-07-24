@@ -8,8 +8,23 @@
     <link rel="stylesheet" href="./slider.css">
 </head>
 <body>
-    <div id="box"></div>
-    <script src="./jquery.js"></script>
-    <script src="./slider.js"></script>
+<div id="box"></div>
+
+<script src="./jquery.js"></script>
+<script src="./slider.js"></script>
+<script>
+    (function(){
+        var sliderBox = new Slider(document.getElementById('box'),[
+            "./img/1.jpg",
+            "./img/2.jpg",
+            "./img/3.jpg",
+            "./img/4.jpg",
+        ],{
+            rate: 1,
+            delay: 5,
+            direction: 1
+        });    
+    })()
+</script>
 </body>
 </html>

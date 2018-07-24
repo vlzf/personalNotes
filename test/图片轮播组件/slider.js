@@ -1,4 +1,4 @@
-window.onload = function(){
+(function(){
 
   function Slider(element,arr,{
     rate = 1,
@@ -216,24 +216,6 @@ window.onload = function(){
     else return true;
   }
 
+  window.Slider = Slider
 
-  var sliderBox = new Slider(document.getElementById('box'),[
-    "./img/1.jpg",
-    "./img/2.jpg",
-    "./img/3.jpg",
-    "./img/4.jpg",
-  ],{
-    rate: 1,
-    delay: 5,
-    direction: 1
-  });
-
-
-  window.myLib = {
-    Slider: Slider
-  }
-
-  document.getElementById('as').addEventListener
-
-  // console.log([document.getElementById('box')])
-}
+})()

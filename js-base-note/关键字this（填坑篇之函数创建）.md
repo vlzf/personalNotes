@@ -1,4 +1,4 @@
-# 函数创建
+# 关键字this（补坑篇之函数创建）
 
 创建函数我们都会，比如：
 ```js
@@ -24,7 +24,7 @@ fn instanceof Object // true
 fn.constructor  // Function
 ```
 函数是由 Function 构造函数创建的。也就是说，当我们声明一个函数时，就相当于使用 Function 构造函数实例化了一个函数对象。  
-从[关键字 this 篇](https://github.com/vlzf/personalNotes/blob/master/js-base-note/%E5%85%B3%E9%94%AE%E5%AD%97this.md)跑过来的人可能已经不耐烦了，回归正题吧。
+从[关键字 this （挖坑篇）](https://github.com/vlzf/personalNotes/blob/master/js-base-note/%E5%85%B3%E9%94%AE%E5%AD%97this.md)跑过来的人可能已经不耐烦了，回归正题吧。
 
 *********************************
 
@@ -128,6 +128,7 @@ fn.apply(obj)
 
 *******************************
 ## 三、例子
+补完坑了就看看例子吧  
 例1：
 ```js
 var length = 1
