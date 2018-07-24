@@ -138,7 +138,7 @@ var obj = {
 obj.a()
 ```
 执行过上面的代码后，发现不对劲了，到底怎么回事？
-这个问题的解答，我们将在[关键字this（填坑篇之函数创建）](https://github.com/vlzf/personalNotes/blob/master/js-base-note/%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA.md)解决。
+这个问题的解答，我们将在[关键字this（填坑篇之函数创建）](https://github.com/vlzf/personalNotes/blob/master/js-base-note/%E5%85%B3%E9%94%AE%E5%AD%97this%EF%BC%88%E5%A1%AB%E5%9D%91%E7%AF%87%E4%B9%8B%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA%EF%BC%89.md)解决。
 
 看完补坑篇的人可以回过头来想想，之前挖的坑究竟坑在哪了？哪里是坑？哪里不是坑？如果你分清楚了，就说明你理解的差不多了。
 
