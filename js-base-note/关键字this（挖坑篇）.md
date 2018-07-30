@@ -30,7 +30,7 @@ k.fn()  // { name: "k", age: 20 }
 
 
 
-**************
+***
 
 
 ## 二、关键字 this
@@ -146,7 +146,9 @@ obj.a()
 
 
 ### 4. 函数环境的更改（更改 this 的指向）
+
 - <font size="4">显式更改（call、apply、bind）</font>
+
 ```js
 var a = 1;
 function say(){
@@ -181,6 +183,7 @@ var second = {
 second.say()  // 2
 say()         // 1
 ```
-*************************
-END
 
+***
+
+END
