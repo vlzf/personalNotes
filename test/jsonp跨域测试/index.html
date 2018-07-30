@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+    <!-- <script>
+        window.jsonp1 = function(data){
+            alert(data.mes)
+        }
+    </script>
+    <script>
+        jsonp1(data)
+    </script> -->
+
+    <script>
+        var jsonp = (function(){
+            var count = 0
+
+            function createScript(url){
+                var script = document.createElement('script')
+                script.src = url
+                script.onload = function(){
+                    script.parentNode.removeChild(script)
+                }
+                document.getElementsByTagName('head')[0].appendChild(script)
+                return script
+            }
+
+            return function(url, opt, callback){
+                // 1. 创建全局回调函数
+                count++
+                var fn = 'jsonp' + count
+                while(window[fn]){
+                    count++
+                    fn = 'jsonp' + count
+                }
+                window[fn] = function(data){
+                    callback(data)
+                    try{
+                        delete window[fn]
+                    }catch(e) {
+                        window[fn] = undefined
+                    }
+                }
+
+
+                // 2. 拼接字符串
+                var strUrl = ''
+                for(var key in opt){
+                    strUrl += '&' + key + '=' + opt[key]
+                }
+                strUrl += '&callback=' +  fn
+                strUrl = strUrl.slice(1)  
+                strUrl = url + '?' + strUrl 
+                
+
+                // 3. 创建 script 标签，发射请求
+                var script = createScript(strUrl)
+
+
+                // 4. 请求超时，清理全局函数和 script 标签
+                setTimeout(function(){
+                    if(window.fn){
+                        try{
+                            delete window[fn]
+                        }catch(e) {
+                            window[fn] = undefined
+                        }
+                        script.parentNode.removeChild(script)
+                    }
+                }, 60000)
+            }
+        })()
+
+
+        jsonp('http://localhost:8080/api/jsonp', { 
+            name: 'vlzf', 
+            time: new Date() 
+        }, function(d){
+            console.log(d)
+        })
+    </script>
+</body>
+</html>
