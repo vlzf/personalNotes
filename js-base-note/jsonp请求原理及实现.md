@@ -151,7 +151,7 @@ jsonp('http://localhost:8080/api/jsonp', {
 })
 ```
 
-### server.js 文件
+### server.js 文件（ node 后台文件）
 ```js
 const express = require('express')
 const app = express()
@@ -174,3 +174,14 @@ app.get('/api/jsonp', function(req,res){
   })
 })
 ```
+会使用 node 和 npm 的人跳过以下步骤：  
+安装 npm，下载 node  
+在 server.js 所在的目录下打开终端，输入:  
+npm init  
+npm install --save express   
+node server.js  
+后台就可以启动了。
+
+
+***
+END
