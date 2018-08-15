@@ -322,23 +322,23 @@ x.next().value.then(function(r){
 看到这里，好像这异步处理与直接用 `Promise` 相比显得更复杂了。为什么？因为我们要在外部调用 next 方法。但是，如果我们把 `next` 的连续调用按一定的规则交给一个函数，那就简单多了。如：
 ```js
 function run(generator){
-  var x = generator()
-  var r = x.next()
-  run2(x, r)
+    var x = generator()
+    var r = x.next()
+    run2(x, r)
 }
 function run2(d, result) {
-  var done = result.done
-  if(result.value instanceof Promise) {
-    result.value.then((r)=>{
-      result = d.next(r)
-      if(!done) return run2(d, result)
-    }).catch(function (e){
-        throw e
-    })
-  } else {
-    result = d.next(result.value)
-    if(!done) return run2(d, result)
-  }
+    var done = result.done
+    if(result.value instanceof Promise) {
+        result.value.then((r)=>{
+            result = d.next(r)
+            if(!done) return run2(d, result)
+        }).catch(function (e){
+            throw e
+        })
+    } else {
+        result = d.next(result.value)
+        if(!done) return run2(d, result)
+    }
 }
 
 
